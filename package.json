@@ -7,7 +7,7 @@
   },
   "type": "module",
   "bin": {
-    "pty-serv": "./dist/index.js"
+    "pty-serv": "./bin/index.js"
   },
   "files": [
     "bin",
