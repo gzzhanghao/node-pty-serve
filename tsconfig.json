@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "module": "nodenext"
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts"]
+}
