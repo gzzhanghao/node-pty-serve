@@ -2,19 +2,13 @@
 
 Spawns a command in a [node-pty](https://github.com/microsoft/node-pty) pseudo-terminal and exposes an HTTP endpoint to interact with it at runtime.
 
-## Installation
-
-```bash
-npm install -g pty-serv
-```
-
 ## Usage
 
 Run a shell, then send a command from another process:
 
 ```bash
 # Terminal 1 – start the PTY server
-pty-serv -s /tmp/pty-serv-0.sock -- bash
+npx pty-serv -s /tmp/pty-serv-0.sock -- bash
 
 # Terminal 2 – interact with it
 curl --unix-socket /tmp/pty-serv-0.sock 'http://[::]/write' --data $'echo hello\r'

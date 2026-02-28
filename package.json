@@ -7,7 +7,7 @@
   },
   "type": "module",
   "bin": {
-    "pty-serv": "./bin/index.js"
+    "pty-serv": "./bin/cli.js"
   },
   "files": [
     "bin",
