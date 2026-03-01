@@ -14,7 +14,7 @@ npx pty-serv -s /tmp/pty-serv-0.sock -- bash
 curl --unix-socket /tmp/pty-serv-0.sock 'http://[::]/write' --data $'echo hello\r'
 ```
 
-### CLI Options
+## CLI Options
 
 | Flag | Description |
 |------|-------------|
@@ -23,7 +23,7 @@ curl --unix-socket /tmp/pty-serv-0.sock 'http://[::]/write' --data $'echo hello\
 | `-h, --hostname <string>` | Hostname for TCP listener (default: all interfaces) |
 | `-o, --options <json>` | JSON options forwarded to [node-pty](https://github.com/microsoft/node-pty) |
 
-### HTTP Endpoint
+## HTTP Endpoint
 
 #### `POST /write`
 
@@ -65,3 +65,38 @@ Pause or resume data flow from the PTY.
 curl 'http://[::]/pause' -X POST
 curl 'http://[::]/resume' -X POST
 ```
+
+## JS APIs
+
+### `getSpawnPtyArgs(command, args?, options?)`
+
+Returns the argument array needed to spawn the PTY server as a child process.
+
+```ts
+import { spawn } from 'node:child_process';
+import { getSpawnPtyArgs } from 'pty-serv';
+
+const nodeArgs = getSpawnPtyArgs('bash', [], {
+  socket: '/tmp/pty-serv-0.sock',
+  ptyOptions: { cols: 220, rows: 50 },
+});
+
+const child = spawn(process.execPath, nodeArgs, { stdio: 'inherit' });
+```
+
+#### Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `command` | `string` | The command to run inside the PTY |
+| `args` | `string[]` | Arguments passed to the command |
+| `options` | `SpawnPtyOptions` | Optional configuration (see below) |
+
+#### `SpawnPtyOptions`
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `socket` | `string` | Unix socket path to listen on |
+| `port` | `number` | TCP port to listen on |
+| `hostname` | `string` | Hostname for TCP listener (default: all interfaces) |
+| `ptyOptions` | `IPtyForkOptions \| IWindowsPtyForkOptions` | Options forwarded to [node-pty](https://github.com/microsoft/node-pty) |
