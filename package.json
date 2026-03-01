@@ -6,6 +6,15 @@
     "url": "git+https://github.com/gzzhanghao/node-pty-serv.git"
   },
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "bin": {
     "pty-serv": "./bin/cli.js"
   },

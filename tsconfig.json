@@ -2,6 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "outDir": "dist",
+    "declaration": true,
     "skipLibCheck": true,
     "module": "nodenext"
   },
